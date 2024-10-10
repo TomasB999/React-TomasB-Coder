@@ -1,0 +1,11 @@
+.container-navbar{
+    background-color: cornflowerblue;
+    display: flex;
+    justify-content: space-between;
+}
+
+.opcionesClick{
+    display: flex;
+    gap: 100px;
+    margin: auto;
+}

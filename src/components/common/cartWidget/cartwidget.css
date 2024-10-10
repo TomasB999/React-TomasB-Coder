@@ -1,0 +1,6 @@
+.carritoIcon{
+    display: flex;
+    gap: 100px;
+    margin: auto;
+    justify-content: space-between;
+}

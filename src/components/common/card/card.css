@@ -1,0 +1,10 @@
+.StyleCARD{
+    margin: 10px;
+    padding: 25px;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: auto;
+}
