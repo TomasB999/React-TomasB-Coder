@@ -1,13 +1,77 @@
-import { Card } from "../../common/card/Card"
+import { useEffect, useState } from "react";
+import { products } from "../../../Products";
+import  ItemList  from "./ItemList";
+import { useParams } from "react-router-dom";
 
 export const ItemListContainer = () => {
-    return (
-    <div>
+    const {name} = useParams();
 
-        <Card title="Caja de Temporada" price={1000} stock={5}/>
-        <Card title="Caja Misteriosa" price={2000} stock={10}/>
-        <Card title="Caja Personalizable" price={2500} stock={3}/>
+    const [items, setItems] = useState([]);
 
-    </div>
-    )
-}
+    useEffect(() => {
+        const filtroCategorias = products.filter(
+            (producto) => producto.category === name
+        );
+        const getProducts = new Promise((resolve)=> {
+            resolve(name ? filtroCategorias : products);
+        });
+        getProducts.then((res) => {
+            setItems(res);
+        });
+    }, [name]);
+    return <ItemList items={items}/>;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let MyProductsPromise = new Promise( (res,rej)=>{
+//     setTimeout( () => {
+//         if (products.length === 0) {
+//             res("Productos vacios");
+//         } else {
+//             res(products);
+//         }
+//     }, 2500);
+// } );
+
+// export const ItemListContainer = () => {
+//     const [myProducts, setMyProducts] = useState([])
+
+//     useEffect( () => {
+//         MyProductsPromise
+//         .then((data) => {
+//             setMyProducts(data);
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+//     },[]);
+
+
+    
+
+//     return (
+//     <div className="li-container">
+//         <ItemList myProducts={myProducts}/>
+//     </div>
+//     )
+// }
+

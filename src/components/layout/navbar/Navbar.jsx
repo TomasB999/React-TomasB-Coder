@@ -1,6 +1,7 @@
 
+import { Link } from "react-router-dom";
+import { CartWidget } from "../../common/cartWidget/CartWidget";
 import "./Navbar.css"
-import { BiCart } from "react-icons/bi";
 
 export const Navbar = ()=>{
 
@@ -9,17 +10,19 @@ export const Navbar = ()=>{
     }
     return (
     <div className="container-navbar">
+        <Link to="/">  
         <img src="https://res.cloudinary.com/ddd3z2fug/image/upload/v1728598934/boxcaja_qcg7gk.png" alt="logo" 
         style={stylesImage}
         />
+        </Link>
         <ul className="opcionesClick">
-            <li>Cajas Temporales</li>
-            <li>Cajas Personalizadas</li>
+            <Link to="/category/De Temporada">Cajas Temporales</Link>
+            <Link to="/category/personalizada">Cajas Personalizadas</Link>
+            <Link to="/category/Mistery Box">Cajas Misteriosas</Link>
             <li>Nosotros</li>
-            <li>Mi Pedido</li>
         </ul>
         
-        <BiCart />
+        <CartWidget />
         <span>0</span>
     </div>
     )

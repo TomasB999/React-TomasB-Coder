@@ -1,16 +1,26 @@
-
-import { Footer } from "./components/layout/footer/footer"
-import { Navbar } from "./components/layout/navbar/Navbar"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { ItemListContainer } from "./components/pages/itemListContainer/itemListContainer"
+import CartContainer from "./components/pages/cart/CartContainer"
+import { Navbar } from "./components/layout/navbar/Navbar"
+import ItemDetailContainer from "./components/pages/itemDetail/ItemDetailContainer"
 
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <ItemListContainer />
-      <Footer />
-    </>
+  <BrowserRouter>
+    <Navbar />
+    <Routes>
+
+      <Route path="/" element={<ItemListContainer/>} />
+      <Route path="/category/:name" element={<ItemListContainer/>} />
+      <Route path="/cart" element={<CartContainer />} />
+      <Route path="/ItemDetail/:id" element={<ItemDetailContainer />} />
+
+
+      <Route path="*" element={ <h1>Error 404 not founded</h1> } />
+
+    </Routes>
+  </BrowserRouter>
   )
 }
 
