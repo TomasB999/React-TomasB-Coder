@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./CartWidget.css"
+import "./cartwidget.css"
 import { BiCart } from "react-icons/bi";
 
 export const CartWidget = () => {
