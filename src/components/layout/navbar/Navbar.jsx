@@ -20,6 +20,7 @@ export const Navbar = ()=>{
             <Link to="/category/personalizada">Cajas Personalizadas</Link>
             <Link to="/category/Mistery Box">Cajas Misteriosas</Link>
             <li>Nosotros</li>
+            
         </ul>
         
         <CartWidget />
