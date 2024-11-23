@@ -3,7 +3,8 @@ import  ItemList  from "./ItemList";
 import { useParams } from "react-router-dom";
 import { Box, CircularProgress } from "@mui/material";
 import { db } from "../../../firebaseConfig";
-import { collection, getDocs, query, where } from "firebase/firestore"
+import { collection, getDocs, query, where, addDoc } from "firebase/firestore"
+import { products } from "../../../Products";
 
 export const ItemListContainer = () => {
     const {name} = useParams();
@@ -32,6 +33,14 @@ export const ItemListContainer = () => {
     // if (items.length === 0){
     //     return <h1>Cargando... </h1>
     // }
+
+    // const funcionParaAgregar = () => {
+    //     const productsCollection = collection( db, "products")
+        
+    //     products.forEach( (product)=> {
+    //         addDoc(productsCollection, product)
+    //     })
+    // }
     return (
             <div className="li-container">
                 <h2>ArBox</h2>
@@ -46,6 +55,7 @@ export const ItemListContainer = () => {
                 </Box>
                 
                 : <ItemList items={items}/>}
+                {/* <button onClick={funcionParaAgregar}>Cargar productos varios</button> */}
 
             </div>
             )
