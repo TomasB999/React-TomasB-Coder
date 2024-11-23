@@ -4,14 +4,17 @@ import CartContainer from "./components/pages/cart/CartContainer"
 import { Navbar } from "./components/layout/navbar/Navbar"
 import ItemDetailContainer from "./components/pages/itemDetail/ItemDetailContainer"
 import Checkout from "./components/pages/checkout/Checkout"
+import { CartContext, CartContextProvinder } from "./context/CartContext"
+import { Toaster } from "sonner"
 
 
 function App() {
   return (
-  <BrowserRouter>
+    <BrowserRouter>
+    <Toaster duration={2000} richColors position="bottom-right"/>
+    <CartContextProvinder>
     <Navbar />
     <Routes>
-
       <Route path="/" element={<ItemListContainer/>} />
       <Route path="/category/:name" element={<ItemListContainer/>} />
       <Route path="/cart" element={<CartContainer />} />
@@ -21,6 +24,7 @@ function App() {
       <Route path="*" element={ <h1>Error 404 not founded</h1> } />
 
     </Routes>
+    </CartContextProvinder>
   </BrowserRouter>
   )
 }

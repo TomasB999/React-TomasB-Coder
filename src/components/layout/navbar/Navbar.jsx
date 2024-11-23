@@ -24,7 +24,6 @@ export const Navbar = ()=>{
         </ul>
         
         <CartWidget />
-        <span>0</span>
     </div>
     )
 }

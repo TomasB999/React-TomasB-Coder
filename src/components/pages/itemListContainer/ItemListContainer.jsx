@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { products } from "../../../Products";
 import  ItemList  from "./ItemList";
 import { useParams } from "react-router-dom";
+import { Box, CircularProgress } from "@mui/material";
 
 export const ItemListContainer = () => {
     const {name} = useParams();
@@ -16,10 +17,32 @@ export const ItemListContainer = () => {
             resolve(name ? filtroCategorias : products);
         });
         getProducts.then((res) => {
-            setItems(res);
+            setTimeout(() => {
+                setItems(res);
+            }, 2000);
         });
     }, [name]);
-    return <ItemList items={items}/>;
+
+    // if (items.length === 0){
+    //     return <h1>Cargando... </h1>
+    // }
+    return (
+            <div className="li-container">
+                <h2>ArBox</h2>
+                {items.length === 0 ? 
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',  // Centra horizontalmente
+                    alignItems: 'center',      // Centra verticalmente
+                    height: '100vh'            // Asegura que ocupe toda la altura de la ventana
+                }}>
+                    <CircularProgress />
+                </Box>
+                
+                : <ItemList items={items}/>}
+
+            </div>
+            )
 };
 
 

@@ -1,5 +1,5 @@
 import Counter from "../../common/counter/Counter"
-const ItemDetail = ({item, agregarAlCarrito}) => {
+const ItemDetail = ({item, agregarAlCarrito, totalInCart}) => {
   
   return (
     <div>
@@ -7,7 +7,7 @@ const ItemDetail = ({item, agregarAlCarrito}) => {
         <img src={item.imageUrl} alt="" />
         <h3>Precio: {item.price}</h3>
         <h3> Stock Disponible:{item.stock}</h3>
-        <Counter stock={item.stock} agregarAlCarrito={agregarAlCarrito}/>
+        <Counter stock={item.stock} agregarAlCarrito={agregarAlCarrito} totalInCart={totalInCart}/>
     </div>
   )
 }
