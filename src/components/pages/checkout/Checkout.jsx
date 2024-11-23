@@ -5,7 +5,7 @@ import { addDoc, collection, doc, updateDoc} from "firebase/firestore"
 import { db } from "../../../firebaseConfig";
 
 const Checkout = () => {
-    const { cart, getTotalAmoun } = useContext( CartContext);
+    const { cart, getTotalAmoun, resetCart } = useContext( CartContext);
 
     const [orderId, setOrderId] = useState(null)
 
@@ -28,6 +28,7 @@ const Checkout = () => {
         }
         let refCollection = collection( db, "orders")
         addDoc(refCollection, order).then((res)=> setOrderId(res.id))
+        resetCart()
 
         let refCol = collection(db , "products")
         order.items.forEach((item) => {
