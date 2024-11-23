@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { products } from "../../../Products";
 import  ItemList  from "./ItemList";
 import { useParams } from "react-router-dom";
 import { Box, CircularProgress } from "@mui/material";
+import { db } from "../../../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore"
 
 export const ItemListContainer = () => {
     const {name} = useParams();
@@ -10,16 +11,21 @@ export const ItemListContainer = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        const filtroCategorias = products.filter(
-            (producto) => producto.category === name
-        );
-        const getProducts = new Promise((resolve)=> {
-            resolve(name ? filtroCategorias : products);
-        });
-        getProducts.then((res) => {
-            setTimeout(() => {
-                setItems(res);
-            }, 2000);
+        const productsCollection = collection( db, "products");
+        // const unaParteDeLaColeccion = query( 
+        //     productsCollection, 
+        //     where( "category", "==", name )
+        // );
+        let docsRef = productsCollection;
+        if( name ){
+            docsRef = query(  productsCollection, where( "category", "==", name ));
+        }
+
+        getDocs( docsRef ).then((res) => {
+            let arrayEntendible = res.docs.map((doc)=>{
+                return {...doc.data(), id: doc.id}
+            });
+            setItems(arrayEntendible);
         });
     }, [name]);
 
@@ -32,9 +38,9 @@ export const ItemListContainer = () => {
                 {items.length === 0 ? 
                 <Box sx={{
                     display: 'flex',
-                    justifyContent: 'center',  // Centra horizontalmente
-                    alignItems: 'center',      // Centra verticalmente
-                    height: '100vh'            // Asegura que ocupe toda la altura de la ventana
+                    justifyContent: 'center', 
+                    alignItems: 'center',      
+                    height: '100vh'            
                 }}>
                     <CircularProgress />
                 </Box>
@@ -45,6 +51,17 @@ export const ItemListContainer = () => {
             )
 };
 
+// const filtroCategorias = products.filter(
+//     (producto) => producto.category === name
+// );
+// const getProducts = new Promise((resolve)=> {
+//     resolve(name ? filtroCategorias : products);
+// });
+// getProducts.then((res) => {
+//     setTimeout(() => {
+//         setItems(res);
+//     }, 1500);
+// });
 
 
 
